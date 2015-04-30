@@ -565,7 +565,12 @@ public class GPProgram
                                        minDepthsClone,
                                        maxDepthsClone,
                                        getMaxNodes());
-      result.setFitnessValue(getFitnessValueDirectly());
+      if (!this.m_reevalFitness){
+    	  result.setFitnessValue(getFitnessValueDirectly());
+    	  if (this.m_additionalFitnessInfo != null)
+    	  result.setAdditionalFitnessInfo(getAdditionalFitnessInfo());
+          
+      }
       // Try to clone application data.
       // ------------------------------
       Object appData = getApplicationData();

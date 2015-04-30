@@ -2,7 +2,6 @@
   <property name="baseDir" value="."/>
   <property name="src" value="./src"/>
   <property name="test" value="./tests"/>
-  <property name="examples" value="./examples/src"/>
   <property name="lib" value="./lib"/>
   <property name="classDir" value="./classes"/>
   <property name="allTests" value="org.jgap.AllTests" />
@@ -60,13 +59,6 @@
 
   <target name="compile">
     <mkdir dir="${classDir}" />
-  <copy todir="${classDir}">
-    <fileset dir="${examples}">
-      <include name="**/*.properties"/>
-      <include name="**/*.png"/>
-      <include name="**/*.jpg"/>
-    </fileset>
-  </copy>
     <javac srcdir="${src}"
            destdir="${classDir}"
            classpathref="classpathCompile">
@@ -75,21 +67,10 @@
            destdir="${classDir}"
            classpathref="classpathCompile">
     </javac>
-    <javac srcdir="${examples}"
-           destdir="${classDir}"
-           classpathref="classpathCompile"
-           excludes="examples/functionFinder/**"/>
   </target>
 
   <target name="compile-debug">
 	<mkdir dir="${classDir}" />
-  	  <copy todir="${classDir}">
-  	    <fileset dir="${examples}">
-  	      <include name="**/*.properties"/>
-  	      <include name="**/*.png"/>
-  	      <include name="**/*.jpg"/>
-  	    </fileset>
-  	  </copy>
   	    <javac debug="on" srcdir="${src}"
   	           destdir="${classDir}"
   	           classpathref="classpathCompile">
@@ -98,10 +79,6 @@
   	           destdir="${classDir}"
   	           classpathref="classpathCompile">
   	    </javac>
-  	    <javac debug="on" srcdir="${examples}"
-  	           destdir="${classDir}"
-  	           classpathref="classpathCompile"
-  	           excludes="examples/functionFinder/**"/>
   </target>
 
   <target name="test" depends="compile">
@@ -150,15 +127,6 @@
        <include name="org/jgap/util/*.class"/>
        <include name="org/jgap/util/tree/*.class"/>
        <include name="org/jgap/xml/*.class"/>
-    </jar>
-
-    <jar jarfile="jgap-examples.jar" basedir="${classDir}">
-         <include name="examples/*.class"/>
-         <include name="examples/monalisa/gui/resources/*.*"/>
-         <include name="examples/gp/monalisa/gui/resources/*.*"/>
-         <include name="examples/**"/>
-         <exclude name="examples/functionFinder/*.class"/>
-         <exclude name="examples/functionFinder/test/*.class"/>
     </jar>
   </target>
 
@@ -228,7 +196,6 @@
     <delete>
       <fileset dir="${classDir}">
         <include name="jgap.jar"/>
-        <include name="jgap-examples.jar"/>
         <include name="org/jgap/*.class"/>
         <include name="org/jgap/audit/*.class"/>
         <include name="org/jgap/data/*.class"/>
@@ -256,8 +223,6 @@
         <include name="org/jgap/xml/*.class"/>
         <include name="org/jgap/util/*.class"/>
         <include name="org/jgap/util/tree/*.class"/>
-        <include name="examples/**.class"/>
-        <include name="examples/test/*.class"/>
       </fileset>
     </delete>
     <delete dir="${dist}" />

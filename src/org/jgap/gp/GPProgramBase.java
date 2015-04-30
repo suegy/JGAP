@@ -27,6 +27,8 @@ public abstract class GPProgramBase
   private double m_fitnessValue = FitnessFunction.NO_FITNESS_VALUE;
 
   private GPConfiguration m_conf;
+  
+  private boolean reEvaluate;
 
   /**
    * Return type per chromosome.
@@ -147,7 +149,7 @@ public abstract class GPProgramBase
    * @since 3.0
    */
   public double getFitnessValue() {
-    if (m_fitnessValue >= 0.000d) {
+    if (m_fitnessValue >= 0.000d || !reEvaluate) {
       return m_fitnessValue;
     }
     else {
