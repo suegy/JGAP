@@ -149,7 +149,7 @@ public abstract class GPProgramBase
    * @since 3.0
    */
   public double getFitnessValue() {
-    if (m_fitnessValue >= 0.000d || !reEvaluate) {
+    if (m_fitnessValue >= 0.000d && !reEvaluate) {
       return m_fitnessValue;
     }
     else {
