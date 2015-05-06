@@ -753,8 +753,10 @@ implements Runnable, Serializable, Comparable {
 			
 			double newfitness = igpProgram.getFitnessValue()-c_t*length;
 			
-			newfitness = (newfitness < 0.001) ? 0.001 : newfitness;
-			igpProgram.setFitnessValue(newfitness);
+			if (newfitness < 0.001)
+				igpProgram.setFitnessValue(0.001);
+			else
+				igpProgram.setScalingFactor(newfitness/igpProgram.getFitnessValue());
 		}
 		
 		m_prev_avg_prog_length = avg_prog_length;
@@ -837,6 +839,8 @@ implements Runnable, Serializable, Comparable {
 			GPPopulation oldPop = getGPPopulation();
 			GPPopulation newPopulation = new GPPopulation(oldPop, false);
 			if (m_fittestToAdd != null) {
+				if (parsimony)
+					m_fittestToAdd.setReEvaluateFitness(true);
 				newPopulation.addFittestProgram(m_fittestToAdd);
 				m_fittestToAdd = null;
 			}
@@ -917,6 +921,8 @@ implements Runnable, Serializable, Comparable {
 							}
 							else if (reproduction < popSize1*(1-crossProb)){
 								reproduction++;
+								if (parsimony)
+									i1.setReEvaluateFitness(true);
 								newPopulation.setGPProgram(i, (IGPProgram)i1.clone());
 								/* FIXME(swen) if the chromosome is already i the new generation a second clode seems not a good idea 
 								 * it is probably enough to have a single copy in the new generation */

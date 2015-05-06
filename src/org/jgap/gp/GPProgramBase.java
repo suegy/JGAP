@@ -29,6 +29,13 @@ public abstract class GPProgramBase
   private GPConfiguration m_conf;
   
   private boolean reEvaluate;
+  
+  /**
+   * The scaling factor is used for the parsimony pressure to rescale the fitness value based 
+   * on its current performance within the generation. By default the value is 1 ad after cloning it is also reset to 1
+   */
+  private double m_scalingFactor = 1d;
+
 
   /**
    * Return type per chromosome.
@@ -150,10 +157,10 @@ public abstract class GPProgramBase
    */
   public double getFitnessValue() {
     if (m_fitnessValue >= 0.000d && !reEvaluate) {
-      return m_fitnessValue;
+      return m_scalingFactor*m_fitnessValue;
     }
     else {
-      return calcFitnessValue();
+      return m_scalingFactor * calcFitnessValue();
     }
   }
 
@@ -169,6 +176,11 @@ public abstract class GPProgramBase
 
   public void setFitnessValue(double a_fitness) {
     m_fitnessValue = a_fitness;
+  }
+  
+  @Override
+  public void setScalingFactor(double scale) {
+	m_scalingFactor = scale;
   }
 
   public void setTypes(Class[] a_types) {

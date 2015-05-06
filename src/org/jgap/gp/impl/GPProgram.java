@@ -661,7 +661,9 @@ public class GPProgram
     m_reevalFitness = reeval;
   }
   public boolean getReEvaluateFitness(){
-	    return m_reevalFitness;
+	  return m_reevalFitness;
 	  }
+  
+  
   
 }

@@ -132,6 +132,15 @@ public interface IGPProgram
   boolean getReEvaluateFitness();
   
   /**
+   * @param scale The value by which the fitness is scaled. The default value is 1d
+   *
+   * @author Swen E Gaudl
+   * @since 3.6.2
+   *    
+   */
+  void setScalingFactor(double scale);
+  
+  /**
    * @return fitness value of this program
    *
    * @author Klaus Meffert
