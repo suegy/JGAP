@@ -8,7 +8,7 @@
 	<!-- Grouping, naming, versioning and packaging -->
 	<groupId>net.sf.jgap</groupId>
 	<artifactId>jgap</artifactId>
-	<version>3.6</version>
+	<version>3.6.3</version>
 	<packaging>jar</packaging>
 
 	<!-- Project information -->
@@ -16,7 +16,7 @@
 	<description>
 		JGAP is a Genetic Algorithms and Genetic Programming component provided as a Java framework.
 	</description>
-	<url>http://jgap.sf.net</url>
+	<url>https://github.com/suegy/JGAP</url>
 	<inceptionYear>2001</inceptionYear>
 	<licenses>
 		<license>
@@ -34,8 +34,8 @@
 
 	<!-- Source code management -->
 	<scm>
-		<connection>scm:cvs:pserver:anonymous@jgap.cvs.sourceforge.net:/cvsroot/jgap</connection>
-		<url>http://jgap.cvs.sourceforge.net/jgap/</url>
+		<connection>https://github.com/suegy/JGAP.git</connection>
+		<url>https://github.com/suegy/JGAP</url>
 	</scm>
 
 	<!-- Developers -->

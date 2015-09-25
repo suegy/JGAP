@@ -14,3 +14,5 @@ hs_err_pid*
 /jgap.jar
 /jgap-tests.jar
 /jgap-examples.jar
+/javadocs/
+/classes/

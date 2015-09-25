@@ -39,6 +39,7 @@
       <include name="jfreechart-1.0.11.jar"/>
       <include name="swing-layout-1.0.3.jar"/>
       <include name="swing-worker-1.1.jar"/>
+      <include name="simple-xml-2.7.1.jar"/>
     </fileset>
     <pathelement path="${classDir}"/>
   </path>
