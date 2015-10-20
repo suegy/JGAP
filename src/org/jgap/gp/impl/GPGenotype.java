@@ -579,6 +579,30 @@ implements Runnable, Serializable, Comparable {
 		IGPFitnessEvaluator evaluator = getGPConfiguration().getGPFitnessEvaluator();
 		m_bestFitness = FitnessFunction.NO_FITNESS_VALUE;
 		boolean bestPreserved = false;
+		
+		getGPConfiguration().getGPFitnessFunction().sequentialStep(pop.getGPPrograms());
+		
+		// to reevaluate re-set the fitness if needed. This is useful for changing non-deterministic environments
+		Thread [] evaluators = new Thread[pop.size()];
+		for (int i = 0; i < pop.size() && pop.getGPProgram(i) != null; i++) {
+			final IGPProgram program = pop.getGPProgram(i);
+			try {
+				// to always recalculate fitness and not use the cached value otherwise the parsimony pressure adds up
+				if (program.getReEvaluateFitness())
+					program.setFitnessValue(-0.001d);
+				
+				//FIXME: a bad fix for parallization of evaluation but hopefully works
+				//evaluators[i]=new Thread(new Runnable(){
+				//	public void run(){
+				//		program.getFitnessValue();
+				//		}});
+				//evaluators[i].start();
+			
+			} catch (IllegalStateException iex) {
+				System.err.println(iex);
+			}
+		}
+
 		for (int i = 0; i < pop.size() && pop.getGPProgram(i) != null; i++) {
 			IGPProgram program = pop.getGPProgram(i);
 			/**@todo get information from fitness function how calculation happened.
@@ -587,10 +611,15 @@ implements Runnable, Serializable, Comparable {
 			 */
 			double fitness;
 			try {
-				// to always recalculate fitness and not use the cached value otherwise the parsimony pressure adds up
-				if (program.getReEvaluateFitness())
-					program.setFitnessValue(-0.001d);
-				//
+			//	while (evaluators[i].isAlive()){
+			//		try {
+			//			Thread.sleep(50);
+			//		} catch (InterruptedException e) {
+			//			// TODO Auto-generated catch block
+			//			e.printStackTrace();
+			//		}
+			//	}
+					
 				fitness = program.getFitnessValue();
 			} catch (IllegalStateException iex) {
 				fitness = Double.NaN;
@@ -1101,7 +1130,8 @@ implements Runnable, Serializable, Comparable {
 	 */
 	public void run() {
 		try {
-			while (!Thread.currentThread().interrupted()) {
+			calcFitness();
+			while (!Thread.interrupted()) {
 				evolve();
 				calcFitness();
 				// Do G.C. for cleanup and to avoid 100% CPU load.

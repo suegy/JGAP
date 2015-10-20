@@ -103,4 +103,11 @@ public abstract class GPFitnessFunction
    * @since 3.0
    */
   protected abstract double evaluate(IGPProgram a_subject);
+  /**
+   * applies a sequential operation to the whole GenoType which is useful for mimicking other programs
+   * @param gpPrograms
+   */
+  public void sequentialStep(IGPProgram[] gpPrograms) {
+  	
+  }
 }
