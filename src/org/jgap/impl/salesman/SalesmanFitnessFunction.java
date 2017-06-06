@@ -41,9 +41,10 @@ public class SalesmanFitnessFunction
    * @author Audrius Meskauskas
    * @since 2.0
    */
-  protected double evaluate(final IChromosome a_subject) {
+  protected double evaluate(final Object a_subject) {
     double s = 0;
-    Gene[] genes = a_subject.getGenes();
+
+    Gene[] genes = ((IChromosome)a_subject).getGenes();
     for (int i = 0; i < genes.length - 1; i++) {
       s += m_salesman.distance(genes[i], genes[i + 1]);
     }

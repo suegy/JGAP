@@ -11,6 +11,7 @@ package org.jgap.gp;
 
 import java.io.*;
 
+
 import org.apache.commons.lang.builder.*;
 import org.jgap.*;
 import org.jgap.gp.impl.*;
@@ -81,7 +82,8 @@ public abstract class CommandGene
       m_value = a_value;
     }
   }
-  private GPConfiguration m_configuration;
+
+  private transient GPConfiguration m_configuration;
 
   /**
    * Should isValid() be called? True = no!
@@ -91,7 +93,7 @@ public abstract class CommandGene
   /**
    * The return type of this node.
    */
-  private Class m_returnType;
+  private String m_returnType;
 
   /**
    * The arity of this node. Arity is the number of children of the node.
@@ -119,7 +121,7 @@ public abstract class CommandGene
    *
    * @since 3.0
    */
-  private Object m_applicationData;
+  private transient Object m_applicationData;
 
   /**
    * Method compareTo and equals: Should we also consider the application data
@@ -170,7 +172,7 @@ public abstract class CommandGene
     m_configuration = a_conf;
     init();
     m_arity = a_arity;
-    m_returnType = a_returnType;
+    m_returnType = a_returnType.getName();
     if (a_returnType == Integer.class
         || a_returnType == Long.class
         || a_returnType == CommandGene.IntegerClass
@@ -446,22 +448,22 @@ public abstract class CommandGene
    * @since 3.0
    */
   public Object execute(ProgramChromosome c, int n, Object[] args) {
-    if (m_returnType == BooleanClass) {
+    if (m_returnType == BooleanClass.getName()) {
       return new Boolean(execute_boolean(c, n, args));
     }
-    if (m_returnType == IntegerClass) {
+    if (m_returnType == IntegerClass.getName()) {
       return new Integer(execute_int(c, n, args));
     }
-    if (m_returnType == LongClass) {
+    if (m_returnType == LongClass.getName()) {
       return new Long(execute_long(c, n, args));
     }
-    if (m_returnType == FloatClass) {
+    if (m_returnType == FloatClass.getName()) {
       return new Float(execute_float(c, n, args));
     }
-    if (m_returnType == DoubleClass) {
+    if (m_returnType == DoubleClass.getName()) {
       return new Double(execute_double(c, n, args));
     }
-    if (m_returnType == VoidClass) {
+    if (m_returnType == VoidClass.getName()) {
       execute_void(c, n, args);
     }
     else {
@@ -477,7 +479,12 @@ public abstract class CommandGene
    * @since 3.0
    */
   public Class getReturnType() {
-    return m_returnType;
+    try {
+      return Class.forName(m_returnType);
+    } catch (ClassNotFoundException e) {
+      e.printStackTrace();
+    }
+    return VoidClass;
   }
 
   /**
@@ -489,7 +496,7 @@ public abstract class CommandGene
    * @since 3.0
    */
   public void setReturnType(Class a_type) {
-    m_returnType = a_type;
+    m_returnType = a_type.getName();
   }
 
   /**

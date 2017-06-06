@@ -52,7 +52,7 @@ public class ProgramChromosome
   /**
    * Array to hold the types of the arguments to this Chromosome.
    */
-  private Class[] argTypes;
+  private String[] argTypes;
 
   private transient int m_index;
 
@@ -62,15 +62,6 @@ public class ProgramChromosome
    * The array of genes contained in this chromosome.
    */
   private CommandGene[] m_genes;
-
-  /**
-   * Application-specific data that is attached to this Chromosome.
-   * This data may assist the application in evaluating this Chromosome
-   * in the fitness function. JGAP does not operate on the data, aside
-   * from allowing it to be set and retrieved, and considering it with
-   * comparations (if user opted in to do so).
-   */
-  private Object m_applicationData;
 
   /**
    * Method compareTo(): Should we also consider the application data when
@@ -119,7 +110,7 @@ public class ProgramChromosome
       throw new IllegalArgumentException("Individual must not be null");
     }
     m_functionSet = a_functionSet;
-    argTypes = a_argTypes;
+    setArgTypes(a_argTypes);
     init(a_size);
   }
 
@@ -148,11 +139,11 @@ public class ProgramChromosome
    * @throws InvalidConfigurationException
    *
    * @author Klaus Meffert
-   * @since 3.0
+   * @author S. Gaudl
+   * @since 3.6.2-mod
    */
-  public ProgramChromosome()
-      throws InvalidConfigurationException {
-    this(GPGenotype.getStaticGPConfiguration());
+  public ProgramChromosome() {
+
   }
 
   private void init()
@@ -167,7 +158,12 @@ public class ProgramChromosome
   }
 
   public void setArgTypes(Class[] a_argTypes) {
-    argTypes = a_argTypes;
+    String [] types = new String[a_argTypes.length];
+
+    for (int i=0;i<a_argTypes.length;i++)
+      types[i]=a_argTypes[i].getName();
+
+    argTypes = types;
   }
 
   public synchronized Object clone() {
@@ -191,7 +187,7 @@ public class ProgramChromosome
       }
       ProgramChromosome chrom = new ProgramChromosome( (GPConfiguration)
           getGPConfiguration(), (CommandGene[]) genes);
-      chrom.argTypes = (Class[]) argTypes.clone();
+      chrom.argTypes = (String[]) argTypes.clone();
       if (getFunctionSet() != null) {
         chrom.setFunctionSet( (CommandGene[]) getFunctionSet().clone());
       }
@@ -242,7 +238,7 @@ public class ProgramChromosome
                          final CommandGene[] a_functionSet, boolean a_grow,
                          int a_tries) {
     try {
-      argTypes = a_argTypes;
+      setArgTypes(a_argTypes);
       setFunctionSet(new CommandGene[a_functionSet.length + a_argTypes.length]);
       System.arraycopy(a_functionSet, 0, getFunctionSet(), 0,
                        a_functionSet.length);
@@ -1163,7 +1159,16 @@ public class ProgramChromosome
   }
 
   public Class[] getArgTypes() {
-    return argTypes;
+    Class [] types = new Class[argTypes.length];
+
+    for (int i=0;i<argTypes.length;i++)
+      try {
+        types[i]=Class.forName(argTypes[i]);
+      } catch (ClassNotFoundException e) {
+        e.printStackTrace();
+      }
+
+    return types;
   }
 
   public int getArity() {
@@ -1224,33 +1229,7 @@ public class ProgramChromosome
         return comparison;
       }
     }
-    /**@todo compare m_functionSet*/
-    if (isCompareApplicationData()) {
-      // Compare application data.
-      // -------------------------
-      if (getApplicationData() == null) {
-        if (otherChromosome.getApplicationData() != null) {
-          return -1;
-        }
-      }
-      else if (otherChromosome.getApplicationData() == null) {
-        return 1;
-      }
-      else {
-        if (getApplicationData() instanceof Comparable) {
-          try {
-            return ( (Comparable) getApplicationData()).compareTo(
-                otherChromosome.getApplicationData());
-          } catch (ClassCastException cex) {
-            return -1;
-          }
-        }
-        else {
-          return getApplicationData().getClass().getName().compareTo(
-              otherChromosome.getApplicationData().getClass().getName());
-        }
-      }
-    }
+
     // Everything is equal. Return zero.
     // ---------------------------------
     return 0;
@@ -1297,21 +1276,7 @@ public class ProgramChromosome
     return m_compareAppData;
   }
 
-  /**
-   * Retrieves the application-specific data that is attached to this
-   * Chromosome. Attaching application-specific data may be useful for
-   * some applications when it comes time to evaluate this Chromosome
-   * in the fitness function. JGAP ignores this data functionally.
-   *
-   * @return the application-specific data previously attached to this
-   * Chromosome, or null if there is no data attached
-   *
-   * @author Klaus Meffert
-   * @since 3.0
-   */
-  public Object getApplicationData() {
-    return m_applicationData;
-  }
+
 
   /**
    * Returns the Gene at the given index (locus) within the Chromosome. The

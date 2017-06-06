@@ -37,7 +37,7 @@ public class RandomFitnessFunction
    * @return randomized fitness value
    * @since 2.0 (until 1.1: return type int)
    */
-  public double evaluate(IChromosome a_chrom) {
+  public double evaluate(Object a_chrom) {
     double result;
     result = m_rand.nextDouble();
     return result;

@@ -322,8 +322,10 @@ public class GPGenotypeTest
 
   class TerminalsOnly
       extends GPFitnessFunction {
-    protected double evaluate(IGPProgram a_subject) {
-      ProgramChromosome chrom1 = a_subject.getChromosome(0);
+    protected double evaluate(Object a_subject) {
+      if (a_subject.getClass() != IGPProgram.class)
+        return 999999.0d;
+      ProgramChromosome chrom1 = ((IGPProgram)a_subject).getChromosome(0);
       CommandGene gene1 = chrom1.getGene(0);
       if (gene1 instanceof Terminal) {
         return gene1.execute_double(null, 0, new Object[] {});

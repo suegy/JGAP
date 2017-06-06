@@ -30,11 +30,11 @@ public class MaxFunction
    * @author Klaus Meffert
    * @since 3.2
    */
-  public double evaluate(IChromosome a_subject) {
+  public double evaluate(Object a_subject) {
     int total = 0;
 
-    for (int i = 0; i < a_subject.size(); i++) {
-      BooleanGene value = (BooleanGene) a_subject.getGene(a_subject.size() -
+    for (int i = 0; i < ((IChromosome)a_subject).size(); i++) {
+      BooleanGene value = (BooleanGene) ((IChromosome)a_subject).getGene(((IChromosome)a_subject).size() -
           (i + 1));
       if (value.booleanValue()) {
         total += Math.pow(2.0, (double) i);

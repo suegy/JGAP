@@ -25,14 +25,17 @@
     <libelement value="jar://$MODULE_DIR$/lib/xpp3_min-1.1.4c.jar!/" />
     <libelement value="jar://$MODULE_DIR$/lib/xstream-1.2.2.jar!/" />
     <libelement value="jar://$MODULE_DIR$/lib/xstream-1.3.1.jar!/" />
+    <libelement value="file://jgap-examples.jar" />
+    <libelement value="file://jgap-tests.jar" />
+    <libelement value="file://jgap.jar" />
     <src_description expected_position="0">
       <src_folder value="file://$MODULE_DIR$/examples/src" expected_position="0" />
       <src_folder value="file://$MODULE_DIR$/examples/test" expected_position="1" />
-      <src_folder value="file://$MODULE_DIR$/src" expected_position="2" />
-      <src_folder value="file://$MODULE_DIR$/tests" expected_position="3" />
+      <src_folder value="file://$MODULE_DIR$/src" expected_position="0" />
+      <src_folder value="file://$MODULE_DIR$/tests" expected_position="1" />
     </src_description>
   </component>
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_5" inherit-compiler-output="false">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <content url="file://$MODULE_DIR$">
@@ -46,7 +49,7 @@
     <orderEntry type="module-library">
       <library name="jgap-examples.jar">
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/jgap-examples.jar!/" />
+          <root url="file://jgap-examples.jar" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -55,7 +58,7 @@
     <orderEntry type="module-library">
       <library name="jgap-tests.jar">
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/jgap-tests.jar!/" />
+          <root url="file://jgap-tests.jar" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -64,7 +67,7 @@
     <orderEntry type="module-library">
       <library name="jgap.jar">
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/jgap.jar!/" />
+          <root url="file://jgap.jar" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -259,7 +262,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="1.8" jdkType="JavaSDK" />
     <orderEntry type="library" name="Maven: commons-lang:commons-lang:2.3" level="project" />
     <orderEntry type="library" name="Maven: org.simpleframework:simple-xml:2.7.1" level="project" />
     <orderEntry type="library" name="Maven: stax:stax-api:1.0.1" level="project" />
@@ -267,6 +270,8 @@
     <orderEntry type="library" name="Maven: log4j:log4j:1.2.9" level="project" />
     <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.3" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-math:2.0" level="project" />
+    <orderEntry type="library" name="Maven: com.google.code.gson:gson:2.8.1" level="project" />
+    <orderEntry type="library" name="Maven: com.owlike:genson:1.4" level="project" />
     <orderEntry type="module-library">
       <library name="Maven: net.sf.trove4j:trove4j:2.0.2">
         <CLASSES>

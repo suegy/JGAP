@@ -46,7 +46,7 @@ public class StaticGPFitnessFunction
    * @author Klaus  Meffert
    * @since 3.2
    */
-  protected double evaluate(IGPProgram a_subject) {
+  protected double evaluate(Object a_subject) {
     double result = m_staticFitnessValue;
     return result;
   }

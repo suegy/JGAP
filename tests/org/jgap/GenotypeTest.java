@@ -1563,11 +1563,11 @@ public class GenotypeTest
 
 
 
-      public double evaluate(IChromosome ic) {
+      public double evaluate(Object ic) {
 
 
-          Double X = getX(ic);
-          Double Y = getY(ic);
+          Double X = getX((IChromosome) ic);
+          Double Y = getY((IChromosome) ic);
 
           double function = Y + X;
           if(function > -1) {

@@ -149,7 +149,7 @@ public class TruthTableFitnessFunctionTest
       m_evaluationValue = a_evaluationValue;
     }
 
-    protected double evaluate(IChromosome a_subject) {
+    protected double evaluate(Object a_subject) {
       return m_evaluationValue;
     }
   }

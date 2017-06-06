@@ -46,7 +46,7 @@ public class StaticFitnessFunction
    * @author Klaus  Meffert
    * @since 2.0 (until 1.1: return type int)
    */
-  public double evaluate(IChromosome a_chrom) {
+  public double evaluate(Object a_chrom) {
     double result = m_staticFitnessValue;
     return result;
   }

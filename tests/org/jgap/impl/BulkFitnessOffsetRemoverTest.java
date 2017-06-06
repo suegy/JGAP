@@ -336,11 +336,11 @@ public class BulkFitnessOffsetRemoverTest
      * @throws ClassCastException if a Gene within the Chromosome is not derived
      * from {@link NumberGene}
      *
-     * @see org.jgap.FitnessFunction#evaluate(org.jgap.Chromosome)
+     * @see org.jgap.FitnessFunction#evaluate(Object)
      */
-    protected double evaluate(IChromosome a_subject) {
+    protected double evaluate(Object a_subject) {
       double ret = 0d;
-      Gene[] genes = a_subject.getGenes();
+      Gene[] genes = ((IChromosome)a_subject).getGenes();
       for (int i = genes.length - 1; i > -1; i--) {
         if (genes[i] instanceof DoubleGene) {
           ret += ( (DoubleGene) genes[i]).doubleValue();

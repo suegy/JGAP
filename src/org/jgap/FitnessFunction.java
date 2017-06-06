@@ -44,7 +44,7 @@ public abstract class FitnessFunction
   /**
    * The fitness value computed during the previous run
    */
-  private double m_lastComputedFitnessValue = NO_FITNESS_VALUE;
+  protected double m_lastComputedFitnessValue = NO_FITNESS_VALUE;
 
   /**
    * Retrieves the fitness value of the given Chromosome. The fitness
@@ -98,9 +98,10 @@ public abstract class FitnessFunction
    *
    * @author Neil Rotstan
    * @author Klaus Meffert
-   * @since 2.0 (until 1.1: return type int)
+   * @author S.Gaudl
+   * @since 3.6.2-mod (until 1.1: return type int)
    */
-  protected abstract double evaluate(IChromosome a_subject);
+  protected abstract double evaluate(Object a_subject);
 
   /**
    * Please override in your implementations!

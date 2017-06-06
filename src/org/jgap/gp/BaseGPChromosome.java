@@ -9,6 +9,7 @@
  */
 package org.jgap.gp;
 
+
 import org.jgap.gp.terminal.*;
 import org.jgap.gp.impl.*;
 import org.jgap.*;
@@ -27,12 +28,12 @@ public abstract class BaseGPChromosome
   /**
    * The configuration object to use.
    */
-  private GPConfiguration m_configuration;
+  private transient GPConfiguration m_configuration;
 
   /**
    * The individual the chromosome belongs to.
    */
-  private IGPProgram m_ind;
+  private transient IGPProgram m_ind;
 
   public BaseGPChromosome(GPConfiguration a_configuration)
       throws InvalidConfigurationException {
@@ -49,6 +50,8 @@ public abstract class BaseGPChromosome
     this(a_configuration);
     m_ind = a_ind;
   }
+
+  protected BaseGPChromosome(){}
 
   /**
    * @return the individual containing this chromosome

@@ -100,7 +100,7 @@ public abstract class TruthTableFitnessFunction
    * @author Klaus Meffert
    * @since 2.4
    */
-  protected abstract double evaluate(IChromosome a_chromosome);
+  protected abstract double evaluate(Object a_chromosome);
 
   /**
    * Fitness value calculation for a given table of input/output tupels

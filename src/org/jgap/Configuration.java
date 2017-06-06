@@ -123,7 +123,7 @@ public class Configuration
    * @author Neil Rotstan
    * @since 1.0
    */
-  private FitnessFunction m_objectiveFunction;
+  protected FitnessFunction m_objectiveFunction;
 
   /**
    * The fitness evaluator. See interface class FitnessEvaluator for details.

@@ -42,7 +42,7 @@ public class TestOverallPerformanceFitnessFunc
    * @return a positive integer reflecting the fitness rating of the given
    * Chromosome
    */
-  public double evaluate(IChromosome a_subject) {
+  public double evaluate(Object a_subject) {
     // The fitness value measures both how close the value is to the
     // target amount supplied by the user and the total number of coins
     // represented by the solution. We do this in two steps: first,
@@ -54,8 +54,8 @@ public class TestOverallPerformanceFitnessFunc
     // representing fewer total coins, and lower fitness values for
     // solutions representing more total coins.
     // ------------------------------------------------------------------
-    int changeAmount = amountOfChange(a_subject);
-    int totalCoins = getTotalNumberOfCoins(a_subject);
+    int changeAmount = amountOfChange((IChromosome) a_subject);
+    int totalCoins = getTotalNumberOfCoins((IChromosome) a_subject);
     int changeDifference = Math.abs(m_targetAmount - changeAmount);
     // Step 1: Determine distance of amount represented by solution from
     // the target amount. Since we know  the maximum amount of change is

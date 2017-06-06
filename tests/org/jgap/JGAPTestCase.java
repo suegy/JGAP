@@ -93,7 +93,7 @@ public abstract class JGAPTestCase
      * @return double
      * @since 2.0
      */
-    protected double evaluate(IChromosome a_subject) {
+    protected double evaluate(Object a_subject) {
       //result does not matter here
       return 1.0000000d;
     }

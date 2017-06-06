@@ -33,13 +33,6 @@ extends Configuration {
 	/** String containing the CVS revision. Read out via reflection!*/
 	private final static String CVS_REVISION = "$Revision: 1.52 $";
 
-	/**@todo introduce lock for configuration*/
-	/**
-	 * References the current fitness function that will be used to evaluate
-	 * chromosomes during the natural selection process.
-	 */
-	private GPFitnessFunction m_objectiveFunction;
-
 	/**
 	 * Internal stack, see PushCommand for example.
 	 */
@@ -129,7 +122,7 @@ extends Configuration {
 	/**
 	 * The fitness evaluator. See interface IGPFitnessEvaluator for details.
 	 */
-	private IGPFitnessEvaluator m_fitnessEvaluator;
+	private IGPFitnessEvaluator m_gpFitnessEvaluator;
 
 	private INodeValidator m_nodeValidator;
 	private ISingleNodeValidator m_singleNodeValidator;
@@ -233,7 +226,7 @@ extends Configuration {
 	 * @since 3.1
 	 */
 	public void setGPFitnessEvaluator(IGPFitnessEvaluator a_evaluator) {
-		m_fitnessEvaluator = a_evaluator;
+		m_gpFitnessEvaluator = a_evaluator;
 	}
 
 	/**
@@ -723,7 +716,7 @@ extends Configuration {
 	}
 
 	public GPFitnessFunction getGPFitnessFunction() {
-		return m_objectiveFunction;
+		return (GPFitnessFunction) m_objectiveFunction;
 	}
 
 	/**
@@ -810,7 +803,7 @@ extends Configuration {
 	 * @since 3.0
 	 */
 	public IGPFitnessEvaluator getGPFitnessEvaluator() {
-		return m_fitnessEvaluator;
+		return m_gpFitnessEvaluator;
 	}
 
 	/**
@@ -933,8 +926,8 @@ extends Configuration {
 					append(m_crossMethod.getClass(), other.m_crossMethod.getClass()).
 					append(m_programCreationMaxTries, other.m_programCreationMaxTries).
 					append(m_strictProgramCreation, other.m_strictProgramCreation).
-					append(m_fitnessEvaluator.getClass(),
-							other.m_fitnessEvaluator.getClass()).toComparison();
+					append(m_gpFitnessEvaluator.getClass(),
+							other.m_gpFitnessEvaluator.getClass()).toComparison();
 		}
 	}
 	/**
@@ -1087,8 +1080,8 @@ extends Configuration {
 			result.m_programCreationMaxTries = m_programCreationMaxTries;
 			result.m_selectionMethod = (INaturalGPSelector) doClone(m_selectionMethod);
 			result.m_crossMethod = (CrossMethod) doClone(m_crossMethod);
-			result.m_fitnessEvaluator = (IGPFitnessEvaluator) doClone(
-					m_fitnessEvaluator);
+			result.m_gpFitnessEvaluator = (IGPFitnessEvaluator) doClone(
+					m_gpFitnessEvaluator);
 			result.m_nodeValidator = (INodeValidator) doClone(m_nodeValidator);
 			result.m_useProgramCache = m_useProgramCache;
 			result.m_verify = m_verify;

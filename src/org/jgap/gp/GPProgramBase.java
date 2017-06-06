@@ -12,7 +12,6 @@ package org.jgap.gp;
 import org.jgap.*;
 import org.jgap.gp.impl.*;
 import org.simpleframework.xml.Default;
-import org.simpleframework.xml.Root;
 
 @Default
 /**
@@ -30,7 +29,7 @@ implements IGPProgram {
 
 	private double m_fitnessValue = FitnessFunction.NO_FITNESS_VALUE;
 
-	private GPConfiguration m_conf;
+	private transient GPConfiguration m_conf;
 
 	private boolean reEvaluate;
 
@@ -44,12 +43,12 @@ implements IGPProgram {
 	/**
 	 * Return type per chromosome.
 	 */
-	private Class[] m_types;
+	private String[] m_types;
 
 	/**
 	 * Argument types for ADF's
 	 */
-	private Class[][] m_argTypes;
+	private String[][] m_argTypes;
 
 	/**
 	 * Available GP-functions.
@@ -75,7 +74,7 @@ implements IGPProgram {
 	/**
 	 * Free to use data object.
 	 */
-	private Object m_applicationData;
+	private transient Object m_applicationData;
 
 	/**
 	 * Default constructor, only for dynamic instantiation.
@@ -100,8 +99,8 @@ implements IGPProgram {
 	public GPProgramBase(IGPProgram a_prog)
 			throws InvalidConfigurationException {
 		this(a_prog.getGPConfiguration());
-		m_types = a_prog.getTypes();
-		m_argTypes = a_prog.getArgTypes();
+		setTypes(a_prog.getTypes());
+		setArgTypes(a_prog.getArgTypes());
 		m_nodeSets = a_prog.getNodeSets();
 		m_maxDepths = a_prog.getMaxDepths();
 		m_minDepths = a_prog.getMinDepths();
@@ -188,27 +187,72 @@ implements IGPProgram {
 	}
 
 	public void setTypes(Class[] a_types) {
-		m_types = a_types;
+		String[] types = new String[a_types.length];
+
+		for (int i = 0; i<a_types.length;i++)
+			types[i] = a_types[i].getName();
+
+		m_types = types;
 	}
 
 	public Class[] getTypes() {
-		return m_types;
+		Class[] types = new Class[m_types.length];
+
+		for (int i = 0; i<m_types.length;i++)
+			types[i] = getType(i);
+
+		return types;
 	}
 
 	public Class getType(int a_index) {
-		return m_types[a_index];
+		try {
+			return Class.forName(m_types[a_index]);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		return Void.class;
 	}
 
 	public void setArgTypes(Class[][] a_argTypes) {
-		m_argTypes = a_argTypes;
+		String[][] types = new String[a_argTypes.length][];
+
+		for (int i = 0; i<a_argTypes.length;i++) {
+			types[i] = new String[a_argTypes[i].length];
+			for (int j = 0; j < a_argTypes[i].length; j++)
+				types[i][j] = a_argTypes[i][j].getName();
+		}
+
+		m_argTypes = types;
 	}
 
 	public Class[][] getArgTypes() {
-		return m_argTypes;
+		Class[][] types = new Class[m_argTypes.length][];
+
+		for (int i = 0; i<m_argTypes.length;i++) {
+			types[i] = new Class[m_argTypes[i].length];
+			for (int j = 0; j < m_argTypes[i].length; j++)
+				try {
+					types[i][j] = Class.forName(m_argTypes[i][j]);
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				}
+		}
+
+		return types;
 	}
 
 	public Class[] getArgType(int a_index) {
-		return m_argTypes[a_index];
+		Class [] types = new Class[m_argTypes[a_index].length];
+
+		for (int i = 0; i < m_argTypes[a_index].length; i++)
+			try {
+				types[i] = Class.forName(m_argTypes[a_index][i]);
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+
+		return types;
 	}
 
 	public void setNodeSets(CommandGene[][] a_nodeSets) {
