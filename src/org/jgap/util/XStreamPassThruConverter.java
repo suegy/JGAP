@@ -9,9 +9,10 @@
  */
 package org.jgap.util;
 
+import java.lang.reflect.Field;
+
 import org.jgap.gp.impl.*;
 
-import junitx.util.*;
 import com.thoughtworks.xstream.*;
 import com.thoughtworks.xstream.annotations.*;
 import com.thoughtworks.xstream.converters.*;
@@ -99,9 +100,10 @@ public abstract class XStreamPassThruConverter
 
   protected void setConfiguration(Object a_obj, String a_fieldName)
       throws Exception {
-    Object conf = PrivateAccessor.getField(a_obj, a_fieldName);
-    if (conf == null) {
-      PrivateAccessor.setField(a_obj, a_fieldName, getConfiguration());
-    }
+	  Field field = ((Class) a_obj).getDeclaredField(a_fieldName);
+	  if (field != null) { // @TODO: This was changed to fix issues with updating libraries as private access is no longer open and I am not even sure this is properly used 
+		  field.setAccessible(true);
+		  field.set(a_obj, getConfiguration());
+	  }
   }
 }

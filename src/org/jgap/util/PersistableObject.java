@@ -10,7 +10,7 @@
 package org.jgap.util;
 
 import java.io.*;
-import org.apache.log4j.*;
+import org.apache.logging.log4j.*;
 import org.jgap.distr.grid.gp.*;
 import org.jgap.gp.*;
 import org.jgap.gp.impl.*;
@@ -27,7 +27,7 @@ public class PersistableObject {
   /** String containing the CVS revision. Read out via reflection!*/
   private final static String CVS_REVISION = "$Revision: 1.7 $";
 
-  private transient Logger log = Logger.getLogger(getClass());
+  private transient Logger log = LogManager.getLogger(getClass());
 
   private Object m_object;
 

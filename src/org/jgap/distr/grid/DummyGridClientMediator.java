@@ -10,7 +10,7 @@
 package org.jgap.distr.grid;
 
 import java.util.*;
-import org.apache.log4j.*;
+import org.apache.logging.log4j.*;
 import org.homedns.dade.jcgrid.client.*;
 import org.homedns.dade.jcgrid.cmd.*;
 import org.homedns.dade.jcgrid.message.*;
@@ -26,7 +26,7 @@ public class DummyGridClientMediator
   /** String containing the CVS revision. Read out via reflection!*/
   private final static String CVS_REVISION = "$Revision: 1.6 $";
 
-  private transient Logger log = Logger.getLogger(getClass());
+  private transient Logger log = LogManager.getLogger(getClass());
 
   protected GridNodeClientConfig m_gridconfig;
 

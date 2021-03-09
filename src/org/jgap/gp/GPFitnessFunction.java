@@ -9,7 +9,8 @@
  */
 package org.jgap.gp;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jgap.FitnessFunction;
 
 /**
@@ -23,7 +24,7 @@ public abstract class GPFitnessFunction extends FitnessFunction {
 
   public final static double MAX_FITNESS_VALUE = Double.MAX_VALUE / 2;
 
-  private transient static Logger LOGGER = Logger.getLogger(GPFitnessFunction.class);
+  private transient static Logger LOGGER = LogManager.getLogger(GPFitnessFunction.class);
 
   /**
    * Default constructor.

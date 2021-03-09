@@ -12,7 +12,7 @@ package org.jgap.gp.impl;
 import java.io.*;
 import java.util.*;
 
-import org.apache.log4j.*;
+import org.apache.logging.log4j.*;
 import org.jgap.*;
 import org.jgap.gp.*;
 import org.jgap.util.*;
@@ -36,7 +36,7 @@ public class GPPopulation
 
   public final static double DELTA = 0.0000001d;
 
-  private transient Logger LOGGER = Logger.getLogger(GPPopulation.class);
+  private transient Logger LOGGER = LogManager.getLogger(GPPopulation.class);
 
   private transient int warningPrototypeReused = 0;
 

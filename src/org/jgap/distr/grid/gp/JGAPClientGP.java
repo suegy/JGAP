@@ -14,6 +14,7 @@ import java.net.*;
 import java.util.*;
 
 import org.apache.commons.cli.*;
+import org.apache.logging.log4j.LogManager;
 import org.homedns.dade.jcgrid.client.*;
 import org.homedns.dade.jcgrid.cmd.*;
 import org.homedns.dade.jcgrid.message.*;
@@ -97,8 +98,8 @@ public class JGAPClientGP
       "m_ind"},
   };
 
-  private static transient org.apache.log4j.Logger log
-      = org.apache.log4j.Logger.getLogger(JGAPClientGP.class);
+  private static transient org.apache.logging.log4j.Logger log
+      = LogManager.getLogger(JGAPClientGP.class);
 
   protected GridNodeClientConfig m_gridconfig;
 

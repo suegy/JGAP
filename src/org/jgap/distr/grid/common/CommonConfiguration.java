@@ -12,7 +12,7 @@ package org.jgap.distr.grid.common;
 
 import java.io.*;
 import org.jgap.util.*;
-import org.apache.log4j.*;
+import org.apache.logging.log4j.*;
 
 /**
  *
@@ -25,7 +25,7 @@ public abstract class CommonConfiguration {
   /** String containing the CVS revision. Read out via reflection!*/
   private final static String CVS_REVISION = "$Revision: 1.2 $";
 
-  private transient Logger LOGGER = Logger.getLogger(CommonConfiguration.class);
+  private transient Logger LOGGER = LogManager.getLogger(CommonConfiguration.class);
 
   /**
    * Working directory

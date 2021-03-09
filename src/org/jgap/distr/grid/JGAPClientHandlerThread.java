@@ -24,8 +24,6 @@ import org.homedns.dade.jcgrid.server.*;
  */
 public class JGAPClientHandlerThread
     extends ClientHandlerThread {
-  /** String containing the CVS revision. Read out via reflection!*/
-  private final static String CVS_REVISION = "$Revision: 1.2 $";
 
   public JGAPClientHandlerThread(GridServer server, Socket socket)
       throws IOException {
@@ -40,14 +38,18 @@ public class JGAPClientHandlerThread
       // --------------
       File f = new File(super.gridServer.getVFSSessionPool().getPath(),n);
       long fsize = f.length();
+    /*
       if (log.isDebugEnabled())
         log.debug("  File size: " + fsize);
-      /**@todo consider 4GB limit*/
+     @FIXME: JCGRID is outdated and does not work anymore correctly either clone and fix or switch to different grid framework
+    @todo consider 4GB limit
+    */
       byte[] data = new byte[ (int) fsize];
       FileInputStream fis = new FileInputStream(f);
-      fis.read(data);
+      int result = fis.read(data);
       fis.close();
-      handlerChannel.send(new GridMessageVFSSessionFileResult(data));
+      if (result > 0 )
+        handlerChannel.send(new GridMessageVFSSessionFileResult(data));
     }
     else {
       super.handleMsg(msg);

@@ -9,7 +9,7 @@
  */
 package org.jgap.distr.grid;
 
-import org.apache.log4j.*;
+import org.apache.logging.log4j.*;
 import org.homedns.dade.jcgrid.*;
 import org.homedns.dade.jcgrid.worker.*;
 import org.apache.commons.cli.*;
@@ -32,7 +32,7 @@ public class JGAPWorkers {
 
   private final static String className = JGAPWorkers.class.getName();
 
-  private static Logger log = Logger.getLogger(className);
+  private static Logger log = LogManager.getLogger(className);
 
   public JGAPWorkers(String[] args)
       throws Exception {

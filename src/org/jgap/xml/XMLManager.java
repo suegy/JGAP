@@ -16,7 +16,6 @@ import javax.xml.parsers.*;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.*;
 import javax.xml.transform.stream.*;
-import junitx.util.PrivateAccessor;
 import org.jgap.*;
 import org.w3c.dom.*;
 
@@ -364,8 +363,10 @@ public class XMLManager {
           // -----------------------------------------
           Constructor constr = geneClass.getConstructor(new Class[] {});
           thisGeneObject = (Gene) constr.newInstance(new Object[] {});
-          thisGeneObject = (Gene) PrivateAccessor.invoke(thisGeneObject,
-              "newGeneInternal", new Class[] {}, new Object[] {});
+          Method method = geneClass.getDeclaredMethod("newGeneInternal", Class.class, Object.class);
+          method.setAccessible(true);
+          thisGeneObject = (Gene) method.invoke(thisGeneObject, new Class[] {}, new Object[] {});
+
         }
       } catch (Throwable e) {
         throw new GeneCreationException(geneClass, e);

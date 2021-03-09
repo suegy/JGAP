@@ -12,7 +12,7 @@ package org.jgap.gp.impl;
 import java.lang.reflect.*;
 import java.util.*;
 
-import org.apache.log4j.*;
+import org.apache.logging.log4j.*;
 import org.jgap.*;
 import org.jgap.gp.*;
 import org.jgap.gp.terminal.*;
@@ -37,7 +37,7 @@ public class ProgramChromosome
 
   final static String GENE_DELIMITER = "#";
 
-  private transient static Logger LOGGER = Logger.getLogger(ProgramChromosome.class);
+  private transient static Logger LOGGER = LogManager.getLogger(ProgramChromosome.class);
 
   /**
    * The list of allowed functions/terminals.

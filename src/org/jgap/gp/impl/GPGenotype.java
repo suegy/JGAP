@@ -12,7 +12,7 @@ package org.jgap.gp.impl;
 import java.io.*;
 import java.util.*;
 
-import org.apache.log4j.*;
+import org.apache.logging.log4j.*;
 import org.jgap.*;
 import org.jgap.distr.grid.gp.*;
 import org.jgap.event.*;
@@ -32,7 +32,7 @@ implements Runnable, Serializable, Comparable {
 	/** String containing the CVS revision. Read out via reflection!*/
 	private final static String CVS_REVISION = "$Revision: 1.60 $";
 
-	private transient static Logger LOGGER = Logger.getLogger(GPGenotype.class);
+	private transient static Logger LOGGER = LogManager.getLogger(GPGenotype.class);
 
 	/**
 	 * The array of GPProgram's that make-up this GPGenotype's population

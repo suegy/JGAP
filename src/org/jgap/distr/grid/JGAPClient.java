@@ -9,7 +9,7 @@
  */
 package org.jgap.distr.grid;
 
-import org.apache.log4j.*;
+import org.apache.logging.log4j.*;
 import org.homedns.dade.jcgrid.client.*;
 import org.jgap.*;
 import org.homedns.dade.jcgrid.message.*;
@@ -34,7 +34,7 @@ public class JGAPClient
 
   private final static String className = JGAPClient.class.getName();
 
-  private static Logger log = Logger.getLogger(className);
+  private static Logger log = LogManager.getLogger(className);
 
   protected GridNodeClientConfig m_gridconfig;
 

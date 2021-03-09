@@ -17,3 +17,6 @@ hs_err_pid*
 /javadocs/
 /classes/
 /target/
+/work/
+/.externalToolBuilders/
+*.jgap.AllTests.txt
